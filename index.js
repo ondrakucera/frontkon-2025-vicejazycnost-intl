@@ -37,6 +37,7 @@ const calendars = Intl.supportedValuesOf("calendar");
 let currentTime = new Date();
 const frontkonTime = new Date("2025-10-01T17:00:00.000+02:00");
 let selectedTime = new Date(Math.floor(currentTime.getTime() / 1000) * 1000); // current time rounded to seconds
+const gaugamelaTime = new Date("-000330-10-01T12:00:00+03:00");
 /** @type {Intl.DateTimeFormat} */
 let dateTimeFormat;
 
@@ -45,7 +46,7 @@ let localeElement, dateStyleElement, timeStyleElement, timeZoneElement, calendar
 /** @type {HTMLInputElement} */
 let selectedTimeInput;
 /** @type {HTMLElement} */
-let currentTimeElement, frontkonTimeElement, selectedTimeElement;
+let currentTimeElement, frontkonTimeElement, selectedTimeElement, gaugamelaTimeElement;
 
 const populateFormElements = () => {
 	const displayNames = new Intl.DisplayNames("cs", { type: "language" });
@@ -85,6 +86,7 @@ const updateDateTimeFormat = () => {
 	updateCurrentTime();
 	updateFrontkonTime();
 	updateSelectedTime();
+	updateGaugamelaTime();
 };
 
 const updateCurrentTime = () => {
@@ -101,6 +103,21 @@ const updateSelectedTime = () => {
 	selectedTimeElement.textContent = dateTimeFormat.format(selectedTime);
 };
 
+const updateGaugamelaTime = () => {
+	gaugamelaTimeElement.textContent = new Intl.DateTimeFormat("cs", {
+		weekday: "long",
+		era: "long",
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+		dayPeriod: "long",
+		hour: "numeric",
+		minute: "numeric",
+		second: "numeric",
+		timeZoneName: "long",
+	}).format(gaugamelaTime);
+};
+
 localeElement = document.getElementById("locale");
 dateStyleElement = document.getElementById("date-style");
 timeStyleElement = document.getElementById("time-style");
@@ -115,6 +132,7 @@ selectedTimeInput.addEventListener("change", updateSelectedTime);
 currentTimeElement = document.getElementById("current-time");
 frontkonTimeElement = document.getElementById("frontkon-time");
 selectedTimeElement = document.getElementById("selected-time");
+gaugamelaTimeElement = document.getElementById("gaugamela-time");
 
 populateFormElements();
 updateDateTimeFormat();

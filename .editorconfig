@@ -1,0 +1,12 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+# In my opinion, it's idiotic having to configure indent_size when indent_style is tab but if it is not set, JetBrains
+# products assume it to be set to 2, which is too little for my eyes, and can't be persuaded otherwise.
+indent_size = 4
+max_line_length = 120
+trim_trailing_whitespace = true
+insert_final_newline = true

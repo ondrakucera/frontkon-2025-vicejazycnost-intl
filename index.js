@@ -31,6 +31,8 @@ const locales = [
 ].map((localeString) => new Intl.Locale(localeString));
 const dateStyles = ["medium", "full", "long", "short"];
 const timeStyles = ["medium", "full", "long", "short"];
+const timeZones = Intl.supportedValuesOf("timeZone");
+const calendars = Intl.supportedValuesOf("calendar");
 
 let currentTime = new Date();
 const frontkonTime = new Date("2025-10-01T17:00:00.000+02:00");
@@ -39,7 +41,7 @@ let selectedTime = new Date(Math.floor(currentTime.getTime() / 1000) * 1000); //
 let dateTimeFormat;
 
 /** @type {HTMLSelectElement} */
-let localeElement, dateStyleElement, timeStyleElement;
+let localeElement, dateStyleElement, timeStyleElement, timeZoneElement, calendarElement;
 /** @type {HTMLInputElement} */
 let selectedTimeInput;
 /** @type {HTMLElement} */
@@ -56,15 +58,30 @@ const populateFormElements = () => {
 	timeStyleElement.innerHTML = timeStyles
 		.map((timeStyle, index) => `<option value="${index}">${timeStyle}</option>`)
 		.join("");
+	timeZoneElement.innerHTML =
+		"<option></option>" +
+		timeZones.map((timeZone, index) => `<option value="${index}">${timeZone}</option>`).join("");
+	calendarElement.innerHTML =
+		"<option></option>" +
+		calendars.map((calendar, index) => `<option value="${index}">${calendar}</option>`).join("");
 
 	selectedTimeInput.value = dateToDatetimeLocalInputValue(selectedTime);
 };
 
 const updateDateTimeFormat = () => {
-	dateTimeFormat = new Intl.DateTimeFormat(locales[Number(localeElement.value)], {
+	const options = {
 		dateStyle: dateStyles[Number(dateStyleElement.value)],
 		timeStyle: timeStyles[Number(timeStyleElement.value)],
-	});
+	};
+	if (timeZoneElement.value !== "") {
+		options.timeZone = timeZones[Number(timeZoneElement.value)];
+	}
+	if (calendarElement.value !== "") {
+		options.calendar = calendars[Number(calendarElement.value)];
+	}
+
+	dateTimeFormat = new Intl.DateTimeFormat(locales[Number(localeElement.value)], options);
+
 	updateCurrentTime();
 	updateFrontkonTime();
 	updateSelectedTime();
@@ -87,7 +104,9 @@ const updateSelectedTime = () => {
 localeElement = document.getElementById("locale");
 dateStyleElement = document.getElementById("date-style");
 timeStyleElement = document.getElementById("time-style");
-[localeElement, dateStyleElement, timeStyleElement].forEach((element) => {
+timeZoneElement = document.getElementById("time-zone");
+calendarElement = document.getElementById("calendar");
+[localeElement, dateStyleElement, timeStyleElement, timeZoneElement, calendarElement].forEach((element) => {
 	element.addEventListener("change", updateDateTimeFormat);
 });
 selectedTimeInput = document.getElementById("selected-time-input");

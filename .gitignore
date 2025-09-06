@@ -137,9 +137,6 @@ fabric.properties
 
 .idea/*
 
-!.idea/codeStyles
-!.idea/runConfigurations
-
 ### Node ###
 # Logs
 logs

@@ -1,5 +1,6 @@
 "use strict";
 
+import { getSelectedArrayItem, populateSelect } from "./common.js";
 import { locales, populateLocaleElement } from "./Locale-common.js";
 
 /**
@@ -38,35 +39,27 @@ let currentTimeElement, frontkonTimeElement, selectedTimeElement, gaugamelaTimeE
 
 const populateFormElements = () => {
 	populateLocaleElement(localeElement, locales);
-	dateStyleElement.innerHTML = dateStyles
-		.map((dateStyle, index) => `<option value="${index}">${dateStyle}</option>`)
-		.join("");
-	timeStyleElement.innerHTML = timeStyles
-		.map((timeStyle, index) => `<option value="${index}">${timeStyle}</option>`)
-		.join("");
-	timeZoneElement.innerHTML =
-		"<option></option>" +
-		timeZones.map((timeZone, index) => `<option value="${index}">${timeZone}</option>`).join("");
-	calendarElement.innerHTML =
-		"<option></option>" +
-		calendars.map((calendar, index) => `<option value="${index}">${calendar}</option>`).join("");
+	populateSelect(dateStyleElement, dateStyles);
+	populateSelect(timeStyleElement, timeStyles);
+	populateSelect(timeZoneElement, timeZones, true);
+	populateSelect(calendarElement, calendars, true);
 
 	selectedTimeInput.value = dateToDatetimeLocalInputValue(selectedTime);
 };
 
 const updateDateTimeFormat = () => {
 	const options = {
-		dateStyle: dateStyles[Number(dateStyleElement.value)],
-		timeStyle: timeStyles[Number(timeStyleElement.value)],
+		dateStyle: getSelectedArrayItem(dateStyleElement, dateStyles),
+		timeStyle: getSelectedArrayItem(timeStyleElement, timeStyles),
 	};
 	if (timeZoneElement.value !== "") {
-		options.timeZone = timeZones[Number(timeZoneElement.value)];
+		options.timeZone = getSelectedArrayItem(timeZoneElement, timeZones);
 	}
 	if (calendarElement.value !== "") {
-		options.calendar = calendars[Number(calendarElement.value)];
+		options.calendar = getSelectedArrayItem(calendarElement, calendars);
 	}
 
-	dateTimeFormat = new Intl.DateTimeFormat(locales[Number(localeElement.value)], options);
+	dateTimeFormat = new Intl.DateTimeFormat(getSelectedArrayItem(localeElement, locales), options);
 
 	updateCurrentTime();
 	updateFrontkonTime();

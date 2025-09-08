@@ -1,6 +1,7 @@
 "use strict";
 
 import { speakers } from "./Collator-common.js";
+import { getSelectedArrayItem, populateSelect } from "./common.js";
 import { locales, populateLocaleElement } from "./Locale-common.js";
 
 const sensitivities = ["base", "accent", "case", "variant"];
@@ -16,18 +17,16 @@ let speakersElement, speakerYesNoElement;
 
 const populateFormElements = () => {
 	populateLocaleElement(localeElement, locales);
-	sensitivityElement.innerHTML =
-		"<option></option>" +
-		sensitivities.map((sensitivity, index) => `<option value="${index}">${sensitivity}</option>`).join("");
+	populateSelect(sensitivityElement, sensitivities, true);
 };
 
 const updateCollator = (withoutRerendering = false) => {
 	const options = { usage: "search" };
 	if (sensitivityElement.value !== "") {
-		options.sensitivity = sensitivities[Number(sensitivityElement.value)];
+		options.sensitivity = getSelectedArrayItem(sensitivityElement, sensitivities);
 	}
 
-	collator = new Intl.Collator(locales[Number(localeElement.value)], options);
+	collator = new Intl.Collator(getSelectedArrayItem(localeElement, locales), options);
 
 	if (!withoutRerendering) {
 		rerender();

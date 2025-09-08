@@ -1,6 +1,7 @@
 "use strict";
 
 import { speakers } from "./Collator-common.js";
+import { getSelectedArrayItem, populateSelect } from "./common.js";
 import { locales, populateLocaleElement } from "./Locale-common.js";
 
 const collations = Intl.supportedValuesOf("collation");
@@ -15,18 +16,16 @@ let speakersElement;
 
 const populateFormElements = () => {
 	populateLocaleElement(localeElement, locales);
-	collationElement.innerHTML =
-		"<option></option>" +
-		collations.map((collation, index) => `<option value="${index}">${collation}</option>`).join("");
+	populateSelect(collationElement, collations, true);
 };
 
 const updateCollator = () => {
 	const options = {};
 	if (collationElement.value !== "") {
-		options.collation = collations[Number(collationElement.value)];
+		options.collation = getSelectedArrayItem(collationElement, collations);
 	}
 
-	collator = new Intl.Collator(locales[Number(localeElement.value)], options);
+	collator = new Intl.Collator(getSelectedArrayItem(localeElement, locales), options);
 
 	rerender();
 };

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Vícejazyčnost s použitím standardního objektu Intl</title>
-		<script src="Collator.js" type="module"></script>
+		<script src="Collator-search.js" type="module"></script>
 	</head>
 	<body>
 		<h1>Intl.Collator</h1>
@@ -17,11 +17,17 @@
 					<select id="locale"></select
 				></label>
 				<label
-					>collation:
-					<select id="collation"></select
+					>sensitivity:
+					<select id="sensitivity"></select
 				></label>
 			</p>
 		</form>
+
+		<h2>Hledání v seznamu řečníků</h2>
+		<p>
+			<label>Hovoří na Frontkonu <input type="text" id="speaker" />?</label>
+		</p>
+		<p id="speaker-yes-no"></p>
 
 		<h2>Seznam řečníků</h2>
 		<ul id="speakers"></ul>

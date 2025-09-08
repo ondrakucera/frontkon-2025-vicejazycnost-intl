@@ -1,38 +1,9 @@
 "use strict";
 
+import { speakers } from "./Collator-common.js";
 import { locales } from "./Locale-common.js";
 
 const collations = Intl.supportedValuesOf("collation");
-const speakers = [
-	"Zakharchenko",
-	"Ricciuti",
-	"Moerkerke",
-	"Matuška",
-	"Willis",
-	"Kulhánek",
-	"Navrátil",
-	"Velíšek",
-	"Hrubý",
-	"Chylík",
-	"Hrstka",
-	"Ungr",
-	"Špaček",
-	"Pustelník",
-	"Malík",
-	"Staněk",
-	"Randák",
-	"Kučera",
-	"Lorenz",
-	"Macek",
-	"Zatloukalová",
-	"Trumm",
-	"Svěrák",
-	"Černý",
-	"Čongrády",
-	"Krejčík",
-	"Seitler",
-	"Trčková",
-];
 
 /** @type {Intl.Collator} */
 let collator;
@@ -52,7 +23,7 @@ const populateFormElements = () => {
 		collations.map((collation, index) => `<option value="${index}">${collation}</option>`).join("");
 };
 
-const updateSpeakers = () => {
+const updateCollator = () => {
 	const options = {};
 	if (collationElement.value !== "") {
 		options.collation = collations[Number(collationElement.value)];
@@ -60,6 +31,10 @@ const updateSpeakers = () => {
 
 	collator = new Intl.Collator(locales[Number(localeElement.value)], options);
 
+	rerender();
+};
+
+const rerender = () => {
 	speakersElement.innerHTML = speakers
 		.sort(collator.compare)
 		.map((speaker) => `<li>${speaker}</li>`)
@@ -68,8 +43,8 @@ const updateSpeakers = () => {
 
 localeElement = document.getElementById("locale");
 collationElement = document.getElementById("collation");
-[localeElement, collationElement].forEach((element) => element.addEventListener("change", updateSpeakers));
+[localeElement, collationElement].forEach((element) => element.addEventListener("change", updateCollator));
 speakersElement = document.getElementById("speakers");
 
 populateFormElements();
-updateSpeakers();
+updateCollator();

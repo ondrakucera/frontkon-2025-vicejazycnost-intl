@@ -1,7 +1,7 @@
 "use strict";
 
 import { speakers } from "./Collator-common.js";
-import { locales } from "./Locale-common.js";
+import { locales, populateLocaleElement } from "./Locale-common.js";
 
 const collations = Intl.supportedValuesOf("collation");
 
@@ -14,10 +14,7 @@ let localeElement, collationElement;
 let speakersElement;
 
 const populateFormElements = () => {
-	const displayNames = new Intl.DisplayNames("cs", { type: "language" });
-	localeElement.innerHTML = locales
-		.map((locale, index) => `<option value="${index}">${displayNames.of(locales[index])}</option>`)
-		.join("");
+	populateLocaleElement(localeElement, locales);
 	collationElement.innerHTML =
 		"<option></option>" +
 		collations.map((collation, index) => `<option value="${index}">${collation}</option>`).join("");

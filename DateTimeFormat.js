@@ -1,6 +1,6 @@
 "use strict";
 
-import { locales } from "./Locale-common.js";
+import { locales, populateLocaleElement } from "./Locale-common.js";
 
 /**
  * @param {Date} date
@@ -37,10 +37,7 @@ let selectedTimeInput;
 let currentTimeElement, frontkonTimeElement, selectedTimeElement, gaugamelaTimeElement;
 
 const populateFormElements = () => {
-	const displayNames = new Intl.DisplayNames("cs", { type: "language" });
-	localeElement.innerHTML = locales
-		.map((locale, index) => `<option value="${index}">${displayNames.of(locales[index])}</option>`)
-		.join("");
+	populateLocaleElement(localeElement, locales);
 	dateStyleElement.innerHTML = dateStyles
 		.map((dateStyle, index) => `<option value="${index}">${dateStyle}</option>`)
 		.join("");

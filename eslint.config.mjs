@@ -10,7 +10,7 @@ export default defineConfig([
 		files: ["**/*.{js,mjs,cjs}"],
 		plugins: { js },
 		extends: ["js/recommended"],
-		languageOptions: { globals: globals.browser, ecmaVersion: 2024 },
+		languageOptions: { globals: { ...globals.browser, Temporal: "readonly" }, ecmaVersion: 2024 },
 		rules: {
 			indent: ["error", "tab"],
 			"linebreak-style": ["error", "unix"],

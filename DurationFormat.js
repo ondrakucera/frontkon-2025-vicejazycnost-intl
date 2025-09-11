@@ -1,6 +1,6 @@
 "use strict";
 
-import { getSelectedArrayItem, populateSelect } from "./common.js";
+import { dateToDatetimeLocalInputValue, frontkonTime, getSelectedArrayItem, populateSelect } from "./common.js";
 import { locales, populateLocaleElement } from "./Locale-common.js";
 
 const styles = ["long", "short", "narrow", "digital"];
@@ -39,23 +39,7 @@ const calculateDuration = (date1, date2) => {
 	}
 };
 
-/**
- * @param {Date} date
- * @returns {string}
- */
-const dateToDatetimeLocalInputValue = (date) => {
-	const year = date.getFullYear();
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const day = String(date.getDate()).padStart(2, "0");
-	const hours = String(date.getHours()).padStart(2, "0");
-	const minutes = String(date.getMinutes()).padStart(2, "0");
-	const seconds = String(date.getSeconds()).padStart(2, "0");
-
-	return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-};
-
 let currentTime = new Date();
-const frontkonTime = new Date("2025-10-01T17:00:00.000+02:00");
 let selectedTime = new Date(Math.floor(currentTime.getTime() / 1000) * 1000); // current time rounded to seconds
 /** @type {Intl.DurationFormat} */
 let durationFormat;

@@ -66,7 +66,7 @@ const updateSelectedTime = () => {
 };
 
 const updateGaugamelaTime = () => {
-	gaugamelaTimeElement.textContent = new Intl.DateTimeFormat("cs", {
+	gaugamelaTimeElement.textContent = new Intl.DateTimeFormat(getSelectedArrayItem(localeElement, locales), {
 		weekday: "long",
 		era: "long",
 		year: "numeric",

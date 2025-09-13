@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="cs">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Vícejazyčnost s použitím standardního objektu Intl</title>
+		<script src="RelativeTimeFormat.js" type="module"></script>
+	</head>
+	<body>
+		<h1>Intl.RelativeTimeFormat</h1>
+
+		<h2>Jazykové nastavení</h2>
+		<form>
+			<p>
+				<label
+					>Locale:
+					<select id="locale"></select
+				></label>
+				<label
+					>style:
+					<select id="style"></select
+				></label>
+				<label
+					>numeric:
+					<select id="numeric"></select
+				></label>
+			</p>
+			<p>
+				<label
+					>Počet:
+					<select id="count"></select
+				></label>
+			</p>
+		</form>
+
+		<h2>Relativní časy</h2>
+		<ul id="relative-times"></ul>
+	</body>
+</html>

@@ -12,9 +12,10 @@ const populateSelect = (selectElement, array, withEmptyOption = false) => {
 };
 
 /**
+ * @template T
  * @param {HTMLSelectElement} selectElement
- * @param {string[]} array
- * @returns {string}
+ * @param {T[]} array
+ * @returns {T}
  */
 const getSelectedArrayItem = (selectElement, array) => array[Number(selectElement.value)];
 

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="cs">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Vícejazyčnost s použitím standardního objektu Intl</title>
+		<script src="Segmenter.js" type="module"></script>
+	</head>
+	<body>
+		<h1>Intl.Segmenter</h1>
+
+		<h2>Jazykové nastavení</h2>
+		<form>
+			<p>
+				<label
+					>Locale:
+					<select id="locale"></select
+				></label>
+				<label
+					>granularity:
+					<select id="granularity"></select
+				></label>
+			</p>
+		</form>
+
+		<h2 id="title"></h2>
+		<ul id="segments"></ul>
+	</body>
+</html>

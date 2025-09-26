@@ -17,16 +17,20 @@ const speakers = [
 	"Staněk",
 	"Randák",
 	"Kučera",
-	"Lorenz",
-	"Macek",
 	"Zatloukalová",
 	"Trumm",
 	"Svěrák",
 	"Černý",
 	"Čongrády",
 	"Krejčík",
+	"Lorenz",
+	"Macek",
 	"Seitler",
+	"Koláček",
 	"Trčková",
+	"Vaněk",
+	"Horák",
+	"Otčenáš",
 ];
 
 export { speakers };

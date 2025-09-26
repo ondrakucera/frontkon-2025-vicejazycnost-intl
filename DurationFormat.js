@@ -69,8 +69,8 @@ const rerender = () => {
 	const durationAgainstSelectedTime = calculateDuration(selectedTime, frontkonTime);
 	selectedTimeDurationElement.textContent =
 		selectedTime.getTime() <= frontkonTime.getTime()
-			? `Do vybraného času zbývá ${durationFormat.format(durationAgainstSelectedTime)}.`
-			: `Od vybraného času uplynulo ${durationFormat.format(durationAgainstSelectedTime)}.`;
+			? `Do mé přednášky na FrontKonu zbývá od vybraného času ${durationFormat.format(durationAgainstSelectedTime)}.`
+			: `Od mé přednášky na FrontKonu uplynulo od vybraného času  ${durationFormat.format(durationAgainstSelectedTime)}.`;
 };
 
 const updateCurrentTime = () => {
